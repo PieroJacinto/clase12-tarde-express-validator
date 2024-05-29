@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var registerController = require('../controllers/registerController');
-const registerValidations = require("../middlewares/registerValidator")
+// Requerimos las validaciones de la carpeta middlewares
+
 
 /* GET home page. */
 router.get('/', registerController.index);
-router.post('/', registerValidations, registerController.store);
+// incluimos el middleware de validaciones entre el path y el controlador
+router.post('/', registerController.store);
 
 module.exports = router;

@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var loginController = require('../controllers/loginController');
+// Requerimos las validaciones de la carpeta middlewares
 
-const loginValidations = require("../middlewares/loginValidator")
 
 /* GET home page. */
 router.get('/', loginController.index);
-router.post('/', loginValidations, loginController.login);
+// incluimos el middleware de validaciones entre el path y el controlador
+router.post('/', loginController.login);
+
 router.post('/logout', loginController.logout);
 
 
