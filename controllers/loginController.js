@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('../database/models');
 //requerimos express validator y validationResult:
-
+const { validationResult } = require("express-validator");
 
 const op = db.Sequelize.Op;
 
@@ -12,9 +12,15 @@ let loginController = {
     },
     login: function(req, res){
         //obtenemos los restultados de las validaciones       
-        
+        const validationErrors = validationResult(req);
+        console.log("validationErrors : ", validationErrors)
         // preguntamos si hay errores y si los hay los enviamos a la vista, junto con lo q venia en el body         
-      
+        if(!validationErrors.isEmpty()){
+            return res.render("login",{
+                errors: validationErrors.mapped(),
+                oldData:req.body
+            })
+        } 
         // Buscamos el usuario que se quiere loguear.
         db.User.findOne({
             where: [{email: req.body.email}]
