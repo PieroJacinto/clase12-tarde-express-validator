@@ -14,7 +14,7 @@ let loginController = {
         //obtenemos los restultados de las validaciones       
         const validationErrors = validationResult(req);
         console.log("validationErrors : ", validationErrors)
-        // preguntamos si hay errores y si los hay los enviamos a la vista, junto con lo q venia en el body         
+        // preguntamos si hay errores y si los hay los enviamos a la vista, junto con lo q venia en el body       
         if(!validationErrors.isEmpty()){
             return res.render("login",{
                 errors: validationErrors.mapped(),
